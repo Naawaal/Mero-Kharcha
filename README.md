@@ -1,6 +1,6 @@
 # mero_kharcha
 
-A new Flutter project.
+Mero Kharcha is a financial management app that helps users keep track of their expenses and manage their budget. It allows users to add and categorize their expenses, view their spending history, and create a budget plan to reach their financial goals. The app also offers features such as alerts for overspending, the ability to set savings goals, and the option to connect to bank accounts and credit cards for automatic expense tracking. Overall, Mero Kharcha is a useful tool for individuals looking to take control of their finances and make informed decisions about their spending habits.
 
 ## Getting Started
 
