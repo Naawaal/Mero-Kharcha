@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NewTranscation extends StatelessWidget {
-  NewTranscation({super.key});
+  final Function addTranscation;
+  NewTranscation({super.key, required this.addTranscation});
 
   final titleController = TextEditingController();
   final amountController = TextEditingController();
@@ -30,7 +31,10 @@ class NewTranscation extends StatelessWidget {
               ),
             ),
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  addTranscation(titleController.text,
+                      double.parse(amountController.text));
+                },
                 icon: const Icon(Icons.add),
                 label: const Text(
                   'Add Transcation',
