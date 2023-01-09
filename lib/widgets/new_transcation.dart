@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
 
-class NewTranscation extends StatelessWidget {
+class NewTranscation extends StatefulWidget {
   final Function addTranscation;
   NewTranscation({super.key, required this.addTranscation});
 
+  @override
+  State<NewTranscation> createState() => _NewTranscationState();
+}
+
+class _NewTranscationState extends State<NewTranscation> {
   final titleController = TextEditingController();
+
   final amountController = TextEditingController();
+
+  void sumbitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
+    widget.addTranscation(
+      enteredTitle,
+      enteredAmount,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +49,12 @@ class NewTranscation extends StatelessWidget {
                 labelText: 'Amount',
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             ElevatedButton.icon(
                 onPressed: () {
-                  addTranscation(titleController.text,
-                      double.parse(amountController.text));
+                  sumbitData();
                 },
                 icon: const Icon(Icons.add),
                 label: const Text(
