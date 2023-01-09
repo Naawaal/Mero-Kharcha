@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mero_kharcha/widgets/chart.dart';
 import 'package:mero_kharcha/widgets/new_transcation.dart';
 import 'package:mero_kharcha/widgets/transcation_list.dart';
 
@@ -13,6 +14,16 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final List<Transcation> _userTrascations = [];
+
+  List<Transcation> get _recentTranscations {
+    return _userTrascations.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTranscation(String txTitle, double txAmount) {
     final newTx = Transcation(
@@ -50,6 +61,7 @@ class _HomepageState extends State<Homepage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Chart(recentTranscations: _recentTranscations),
             TranscationList(_userTrascations),
           ],
         ),

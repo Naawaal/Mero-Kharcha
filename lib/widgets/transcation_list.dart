@@ -33,40 +33,27 @@ class TranscationList extends StatelessWidget {
                 itemCount: transcations.length,
                 itemBuilder: (ctx, index) {
                   return Card(
-                    elevation: 1.5,
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(5.0),
-                          margin: const EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 15,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Theme.of(context).primaryColor,
-                              width: 2,
-                            ),
-                          ),
-                          child: Text('Rs: ${transcations[index].amount}',
-                              style: const TextStyle(
-                                fontSize: 15,
-                              )),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(transcations[index].title,
-                                style: Theme.of(context).textTheme.headline6),
-                            Text(
-                                DateFormat.yMMMd()
-                                    .format(transcations[index].date),
-                                style: const TextStyle(fontSize: 15.0)),
-                          ],
-                        ),
-                      ],
+                      child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: FittedBox(
+                            child: Text('₹ ${transcations[index].amount}')),
+                      ),
                     ),
-                  );
+                    title: Text(
+                      transcations[index].title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    subtitle: Text(
+                        DateFormat.yMMMd().format(transcations[index].date)),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () {},
+                    ),
+                  ));
                 }));
   }
 }
