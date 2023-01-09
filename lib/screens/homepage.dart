@@ -5,7 +5,7 @@ import 'package:mero_kharcha/widgets/transcation_list.dart';
 import '../models/transcation.dart';
 
 class Homepage extends StatefulWidget {
-  Homepage({super.key});
+  const Homepage({super.key});
 
   @override
   State<Homepage> createState() => _HomepageState();
@@ -42,7 +42,7 @@ class _HomepageState extends State<Homepage> {
         elevation: 2,
         title: const Text(
           'Mero Kharcha',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(

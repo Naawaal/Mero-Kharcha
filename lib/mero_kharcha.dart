@@ -9,8 +9,12 @@ class MeroKharcha extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mero Kharcha',
-      home: Homepage(),
-      theme: ThemeData(),
+      home: const Homepage(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.blue),
+        fontFamily: 'Quicksand',
+      ),
     );
   }
 }

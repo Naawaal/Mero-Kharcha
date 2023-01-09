@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class NewTranscation extends StatefulWidget {
   final Function addTranscation;
-  NewTranscation({super.key, required this.addTranscation});
+  const NewTranscation({super.key, required this.addTranscation});
 
   @override
   State<NewTranscation> createState() => _NewTranscationState();
@@ -24,6 +24,7 @@ class _NewTranscationState extends State<NewTranscation> {
       enteredTitle,
       enteredAmount,
     );
+    Navigator.of(context).pop();
   }
 
   @override
@@ -33,6 +34,7 @@ class _NewTranscationState extends State<NewTranscation> {
       child: Container(
         padding: const EdgeInsets.all(10),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
