@@ -12,8 +12,14 @@ class MeroKharcha extends StatelessWidget {
       home: const Homepage(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.blue),
         fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: const TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
       ),
     );
   }
