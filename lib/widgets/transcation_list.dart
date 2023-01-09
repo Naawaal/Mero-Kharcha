@@ -4,8 +4,12 @@ import 'package:mero_kharcha/models/transcation.dart';
 
 class TranscationList extends StatelessWidget {
   final List<Transcation> transcations;
+  final Function deleteTx;
 
-  const TranscationList(this.transcations);
+  const TranscationList(
+    this.transcations,
+    this.deleteTx,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +55,9 @@ class TranscationList extends StatelessWidget {
                     trailing: IconButton(
                       icon: const Icon(Icons.delete),
                       color: Theme.of(context).errorColor,
-                      onPressed: () {},
+                      onPressed: () {
+                        deleteTx(transcations[index].id);
+                      },
                     ),
                   ));
                 }));

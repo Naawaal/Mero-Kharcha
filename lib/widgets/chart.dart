@@ -7,7 +7,7 @@ class Chart extends StatelessWidget {
   final List<Transcation> recentTranscations;
 
   List<Map<String, Object>> get groupedTranscationValues {
-    return List.generate(07, (index) {
+    return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(
         Duration(days: index),
       );
@@ -25,7 +25,7 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum
       };
-    });
+    }).reversed.toList();
   }
 
   double get maxSpending {

@@ -25,11 +25,12 @@ class _HomepageState extends State<Homepage> {
     }).toList();
   }
 
-  void _addNewTranscation(String txTitle, double txAmount) {
+  void _addNewTranscation(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transcation(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
     setState(() {
@@ -43,6 +44,12 @@ class _HomepageState extends State<Homepage> {
         builder: (_) {
           return NewTranscation(addTranscation: _addNewTranscation);
         });
+  }
+
+  void _deleteTranscation(String id) {
+    setState(() {
+      _userTrascations.removeWhere((tx) => tx.id == id);
+    });
   }
 
   @override
@@ -62,7 +69,7 @@ class _HomepageState extends State<Homepage> {
         child: Column(
           children: [
             Chart(recentTranscations: _recentTranscations),
-            TranscationList(_userTrascations),
+            TranscationList(_userTrascations, _deleteTranscation),
           ],
         ),
       ),

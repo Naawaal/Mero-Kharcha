@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTranscation extends StatefulWidget {
   final Function addTranscation;
@@ -9,22 +10,42 @@ class NewTranscation extends StatefulWidget {
 }
 
 class _NewTranscationState extends State<NewTranscation> {
-  final titleController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
 
-  final amountController = TextEditingController();
+  void _sumbitData() {
+    if (_amountController.text.isEmpty) {
+      return;
+    }
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
 
-  void sumbitData() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
-
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
     widget.addTranscation(
       enteredTitle,
       enteredAmount,
+      _selectedDate,
     );
     Navigator.of(context).pop();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -39,24 +60,45 @@ class _NewTranscationState extends State<NewTranscation> {
           children: [
             TextField(
               keyboardType: TextInputType.text,
-              controller: titleController,
+              controller: _titleController,
               decoration: const InputDecoration(
                 labelText: 'Title',
               ),
             ),
             TextField(
               keyboardType: TextInputType.number,
-              controller: amountController,
+              controller: _amountController,
               decoration: const InputDecoration(
                 labelText: 'Amount',
               ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    _selectedDate == null
+                        ? 'No Date Chosen!'
+                        : DateFormat.yMd().format(_selectedDate),
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      _presentDatePicker();
+                    },
+                    child: const Text(
+                      'Choose Date',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ))
+              ],
             ),
             const SizedBox(
               height: 10,
             ),
             ElevatedButton.icon(
                 onPressed: () {
-                  sumbitData();
+                  _sumbitData();
                 },
                 icon: const Icon(Icons.add),
                 label: const Text(
