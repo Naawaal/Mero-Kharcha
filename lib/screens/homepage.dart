@@ -54,22 +54,34 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.purple,
-        elevation: 2,
-        title: const Text(
-          'Mero Kharcha',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+    final appBar = AppBar(
+      backgroundColor: Colors.purple,
+      elevation: 2,
+      title: const Text(
+        'Mero Kharcha',
+        style: TextStyle(
+          color: Colors.white,
         ),
       ),
+    );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Chart(recentTranscations: _recentTranscations),
-            TranscationList(_userTrascations, _deleteTranscation),
+            Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.3,
+                child: Chart(recentTranscations: _recentTranscations)),
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.7,
+              child: TranscationList(_userTrascations, _deleteTranscation),
+            ),
           ],
         ),
       ),
